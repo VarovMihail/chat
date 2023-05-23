@@ -6,6 +6,9 @@ redis~=4.4
 djangorestframework~=3.14
 drf-yasg~=1.21
 celery~=5.2
+channels[daphne]~=4.0
+channels-redis~=4.0
+cryptography~=38.0
 
 ### Optional dependencies ###
 

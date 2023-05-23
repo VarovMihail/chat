@@ -1,0 +1,50 @@
+{% extends 'chat/base.html' %}
+{% load static %}
+
+
+{% block container %}
+
+<div class="row clearfix">
+  <div class="col-lg-12">
+    <div class="card chat-app">
+      <div id="plist" class="people-list">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fa fa-search"></i></span>
+          </div>
+          <input type="text" class="form-control" placeholder="Search...">
+        </div>
+        <ul id="chatListPagination" data-href="#" class="list-unstyled chat-list mt-2 mb-0">
+
+        </ul>
+      </div>
+      <div class="chat">
+        <div class="chat-header clearfix">
+          <div class="row">
+            <div class="col-lg-6">
+              {% include 'chat/includes/chatInfoPanel.html' %}
+            </div>
+            <div class="col-lg-6 hidden-sm text-right">
+              {% include 'chat/includes/chatButtons.html' %}
+            </div>
+          </div>
+        </div>
+        <div class="chat-history">
+          <ul class="m-b-0 msg_history">
+            {% include 'chat/includes/chatMessage.html' %}
+          </ul>
+        </div>
+        <div class="chat-message clearfix">
+            {% include 'chat/includes/textInputField.html' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock container %}
+
+
+{% block jquery %}
+   $.getScript('{% static 'chat/js/chat.js' %}')
+{% endblock jquery %}

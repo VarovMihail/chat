@@ -41,12 +41,16 @@ HEALTH_CHECK_URL = os.environ.get('HEALTH_CHECK_URL', '/application/health/')
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 INSTALLED_APPS = [
+    'daphne',
+    'chat',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+
 ]
 
 THIRD_PARTY_APPS = [
@@ -55,6 +59,7 @@ THIRD_PARTY_APPS = [
     'drf_yasg',
     'corsheaders',
     'rosetta',
+    'channels'
 ]
 
 LOCAL_APPS = [
@@ -79,7 +84,7 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
-    'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework.authentication.SessionAuthentication',),
+    # 'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework.authentication.SessionAuthentication',),
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
 }
 
@@ -162,8 +167,8 @@ LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 
 LANGUAGES = (('en', 'English'),)
 
-SESSION_COOKIE_NAME = 'sessionid'
-CSRF_COOKIE_NAME = 'csrftoken'
+SESSION_COOKIE_NAME = 'sessionid_chat'
+CSRF_COOKIE_NAME = 'csrftoken_chat'
 
 ROSETTA_SHOW_AT_ADMIN_PANEL = DEBUG
 
@@ -194,3 +199,14 @@ if (SENTRY_DSN := os.environ.get('SENTRY_DSN')) and ENABLE_SENTRY:
         # django.contrib.auth) you may enable sending PII data.
         send_default_pii=True,
     )
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [('redis', 6379)],
+        },
+    },
+}
+
+BLOG_URL = 'http://web:8000'
+JWT_AUTH_COOKIE = 'jwt-auth'

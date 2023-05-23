@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <title>{% block title %} Chat {% endblock title%} </title>
+  <link rel="stylesheet" type="text/css" href="{% static 'chat/css/main.css' %}">
+  {% block head %}
+  {% endblock head %}
+</head>
+<body>
+<div class="container">
+  {% block container %}
+  {% endblock container %}
+</div>
+
+<script src="{% static 'chat/js/reconnecting-websocket.min.js' %}"></script>
+{% block script %}
+{% endblock script %}
+<script>
+  $(document).ready(function(){
+    {% block jquery %}
+
+    {% endblock jquery %}
+  })
+</script>
+
+</body>
+</html>
